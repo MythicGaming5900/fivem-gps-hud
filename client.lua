@@ -1,12 +1,22 @@
 local vehicle = false
+enable = true
+
+RegisterCommand('disablegps', function()
+    enable = false
+end)
+
+
+RegisterCommand('enablegps', function()
+    enable = true
+end)
 
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
-     if(vehicle == true) then
+     if(vehicle == true) and (enable == true) then
         SendNUIMessage({type = "ui", display = true})
         RemoveBlip(GetNorthRadarBlip())
-     else 
+     else
         SendNUIMessage({type = "ui", display = false})
      end
    end
